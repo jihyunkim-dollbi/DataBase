@@ -50,10 +50,52 @@ public class BoardListServlet extends HttpServlet {
 		PrintWriter out=response.getWriter(); //브라우저에 데이터를 뿌리기 전에 브라우저의 어떤 위치에 뿌릴지 위치선정..
 		// 어디에 뿌릴지 out이 알려줌
 		// 어디에 저장할 지 알려줌
+		BoardDAO dao=new BoardDAO();
+		ArrayList<BoardVO> list=dao.boardListData(1); // 1페이지!
 		
 		out.println("<html>");
+		out.println("<head>");
+		out.println("<link rel=stylesheet href=\"CSS/table.css\">");
+		out.println("</head>");
 		out.println("<body>");
-		out.println("<h>Hello Servlet</h1>");
+		out.println("<center>");
+		out.println("<h1> 자유게시판</h1>");
+		
+		
+		out.println("<table id=\"table_content\" width=700>");
+		out.println("<tr>");
+		out.println("<td align=left>");
+		out.println("</td>");
+		out.println("</tr>");
+		out.println("<table>");
+		
+		
+		out.println("<table id=\"table_content\" width=700>");
+		out.println("<tr>");
+		out.println("<th width=10%>번호</th>");
+		out.println("<th width=45%>제목</th>");
+		out.println("<th width=15%>이름</th>");
+		out.println("<th width=20%>작성일</th>");
+		out.println("<th width=10%>조회수</th>");
+		out.println("</tr>");
+		
+		for(BoardVO vo:list) // 10바퀴 돌기!
+		{
+			out.println("<tr>");
+			out.println("<td width=10% align=center>"+vo.getNo()+"</td>");
+			out.println("<td width=45% align=left>"+vo.getSubject()+"</td>");
+			out.println("<td width=15% align=center>"+vo.getName()+"</td>");
+			out.println("<td width=20% align=center>"+vo.getRegdate()+"</td>");
+			out.println("<td width=10% align=center>"+vo.getHit()+"</td>");
+			out.println("</tr>");
+			
+			
+		}
+		
+		
+		
+		out.println("</table>");
+		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
 		// 메모리아 ()안의 값이 저장되고 
