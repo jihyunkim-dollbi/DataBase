@@ -1,0 +1,80 @@
+#table_content{
+	border-collapse: collapse;
+	border-top-width: 2px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #333;
+	border-bottom-color: #808080;
+	
+}
+#table_content th,td{
+	margin: 0px; /*   td와 td사이 간격 0을 주어 붙여서 출력   */
+	padding: 8px;  /*  td안에 간격을 주어 한칸 띈 효과   */
+	font-size: 9pt;
+}
+#table_content th{
+	background-color: #999;
+	color: #fff;
+	border-bottom-width: 1px;
+	border-bottom-color: #333; 
+}
+#table_content td{
+	border-bottom-width: 1px;
+	border-bottom-color: #666;
+	border-bottom-style: dotted;
+	
+}
+#table_content .dataTr:HOVER {
+	background-color: #00ff00;
+	cursor: pointer;  /*  핸드커서 - 마우스 갖다 대었을때  */
+	cursor: hand;
+}
+#table_content .tdleft{
+	text-align: left;
+}
+#table_content .tdright{
+	text-align: right;
+	
+}
+#table_content .tdcenter{
+	text-align: center;
+}
+#table_content a{
+	text-decoration: none;
+	color:black;
+}
+#table_content a.post{
+	text-decoration: none;
+	color:#fff;
+}
+#table_content a:HOVER{
+	text-decoration: underline;
+	color:green;
+}
+#abc,
+img,
+input[type="submit"],
+input[type="button"],
+input[type="text"], 
+select, 
+textarea, 
+input[type="password"] {
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    <!-- WEBKIT크롬
+    MOZ-파이어폭스
+    border 익스플로러 
+    아이디 인식 #으로  ==>중복이 없다
+    태그명인식 -> 중복이 많아 사용X
+    클래스명 인식  .으로 ==> 중복이 있는 데이터 가져올때
+    
+    -->
+    border: 1px #CCC solid;
+    
+    
+}
+
+
+
