@@ -48,15 +48,48 @@ public class BoardListServlet extends HttpServlet {
 		 * ==============================> 루트 => webcontent
 		 * 
 		 * 모든 서블랫은 webcontent안에 있다! 
+		 * 
+		 * &lt;다음&gt; 
+		 * 
+		 * 
+		 * 
 		 */
 		// 실행한 결과를 어떤 형태로 실행할 것인지. 어떤 브라우저로 실행할 것인가 xml? , html?
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter(); //브라우저에 데이터를 뿌리기 전에 브라우저의 어떤 위치에 뿌릴지 위치선정..
 		// 어디에 뿌릴지 out이 알려줌
 		// 어디에 저장할 지 알려줌
+		
+		
+		//사용자가 요청한 페이지를 받는다=> 받은 페이지를 list=dao.boardListData(1); 여기에 넣으면 ok
+		String strPage=request.getParameter("page");
+		
+		//맨처음에 한번은 페이지를 입력하지 않기때문에 null값이다.
+		if(strPage==null)
+		{
+			strPage="1"; //항상 디폴트로  1 페이지를 줘야한다.
+		}
+		
+		int curpage=Integer.parseInt(strPage); 
+		
+		
+		
 		BoardDAO dao=new BoardDAO();
 		ArrayList<BoardVO> list=dao.boardListData(1); // 1페이지!
 		
+		//총페이지 받기
+		int totalPage=dao.boardTotalPage(); //html 출력하기 전에 데이터 값을 모두 받아놔야한다.
+		
+	/*
+	 * 사용자 입력값 받고
+	 * 오라클에서 값 받고
+	 * MVC = 모델수행(자바) => 뷰수행(HTML)
+	 * 폼을 만들고
+	 * 폼에 뿌려준다
+	 *
+	 */
+		
+		// HTML 에 출력하기!
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<link rel=stylesheet href=\"CSS/table.css\">");
@@ -118,9 +151,19 @@ public class BoardListServlet extends HttpServlet {
 		out.println("</td>");
 		
 		out.println("<td align=right>");
-		out.println("<a href=\"#\">이전</a>");
-		out.println("0 page / 0 pages");
-		out.println("<a href=\"#\">다음</a>");
+		out.println("<a href=\"BoardListServlet?page="+(curpage>1?curpage-1:curpage)+"\">&lt;이전&gt;</a>");
+		
+		/*
+		 * 특수문자
+		 * &nbsp; " "
+		 * &lt;   <
+		 * &gt;   >
+		 * 
+		 */
+		
+		
+		out.println(curpage+"page / " + totalPage + " pages");
+		out.println("<a href=\"BoardListServlet?page="+(curpage<totalPage?curpage+1:curpage)+"\">&lt;다음&gt;</a>");
 		out.println("</td>");
 		
 		out.println("</tr>");

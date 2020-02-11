@@ -113,7 +113,7 @@ public class BoardDAO {
 						vo.setHit(rs.getInt(5));
 						
 						list.add(vo);
-							
+						i++;	
 					}
 					j++;
 						
