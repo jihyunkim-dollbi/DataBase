@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.dao.*;
 import java.util.*;
 
-@WebServlet("/BoardListServlet")
+@WebServlet("/BoardListServlet") // 사이트 주소
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,6 +44,10 @@ public class BoardListServlet extends HttpServlet {
 		 * html 파일에서 초록색 글자는 모두 out.println이 생략된 것이다. 
 		 * 
 		 * 
+		 * http://localhost/BoardPROJECT1/BoardListServlet
+		 * ==============================> 루트 => webcontent
+		 * 
+		 * 모든 서블랫은 webcontent안에 있다! 
 		 */
 		// 실행한 결과를 어떤 형태로 실행할 것인지. 어떤 브라우저로 실행할 것인가 xml? , html?
 		response.setContentType("text/html;charset=UTF-8");
@@ -61,10 +65,11 @@ public class BoardListServlet extends HttpServlet {
 		out.println("<center>");
 		out.println("<h1> 자유게시판</h1>");
 		
-		
+		// 글쓰기 => 클릭하면 BoardInsert 이 파일을 가져옴. 
 		out.println("<table id=\"table_content\" width=700>");
 		out.println("<tr>");
-		out.println("<td align=left>");
+		out.println("<td align=right>");
+		out.println("<a href=\"BoardInsert\">글쓰기</a>");
 		out.println("</td>");
 		out.println("</tr>");
 		out.println("<table>");
@@ -95,6 +100,34 @@ public class BoardListServlet extends HttpServlet {
 		
 		
 		out.println("</table>");
+		
+		
+		out.println("<table id=\"table_content\" width=700>");
+		out.println("<tr>");
+		
+		out.println("<td align=left>");
+		out.println("Search:");
+		out.println("<select>");
+		out.println("<option>이름</option>");
+		out.println("<option>제목</option>");
+		out.println("<option>내용</option>");
+		out.println("</select>");
+		out.println("<input type=text size=15>");
+		out.println("<input type=button value=찾기>");
+		
+		out.println("</td>");
+		
+		out.println("<td align=right>");
+		out.println("<a href=\"#\">이전</a>");
+		out.println("0 page / 0 pages");
+		out.println("<a href=\"#\">다음</a>");
+		out.println("</td>");
+		
+		out.println("</tr>");
+		out.println("<table>");
+		
+		
+		
 		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
