@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<% %>
-
+<% 
+%>
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<link rel=stylesheet href=\"css/table.css\">");
@@ -24,6 +24,3 @@
 		out.println("</body>");
 		out.println("</html>");
 
-
-
-</body>
