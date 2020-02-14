@@ -139,9 +139,6 @@ public class BoardListServlet extends HttpServlet {
 			
 			out.println("<a href=BoardDetailServlet?no="+vo.getNo()+">");
 			out.println(vo.getSubject()+"</a>");
-			
-			
-			
 			out.println("</td>");
 			
 			out.println("<td width=15% align=center>"+vo.getName()+"</td>");
