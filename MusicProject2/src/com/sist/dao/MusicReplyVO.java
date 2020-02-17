@@ -40,10 +40,18 @@ public class MusicReplyVO {
 	private String id;
 	private String name;
 	private String msg;
-	private Date regdate;
+	private Date regdate;	
+	//프로그램에서 필요한 변수 설정 =>db와 성관없이 추가하여 사용함!
 	private String dbDay;
+	private String sex;
 	
 	
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	public int getNo() {
 		return no;
 	}

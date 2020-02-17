@@ -1,6 +1,8 @@
 package com.sist.servlet;
 
 import java.io.*;
+import java.util.StringTokenizer;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,6 +90,7 @@ public class Login extends HttpServlet {
 		out.println("</table>");
 		out.println("</form>");
 		
+		
 		out.println("</div>");  // .row닫기
 		out.println("</body>");
 		out.println("</container>"); //.container => 브라우저에서 가장 먼저 설정해두기 때문에 가장 마지막에 닫아둠
@@ -152,7 +155,13 @@ public class Login extends HttpServlet {
 			//따라서 로그인시 세션에 이름과 id를 저장해놓기 => 서버에 저장됨
 			//쿠기는 본인 컴퓨터 안에 저장 => 다른 컴퓨터에서는 적용x
 			//다른 곳에서 또 로그인시 로그인 중입니다.. 라고 나올수...
+			// get아니고 set!
 			session.setAttribute("id", id); // 저장하기 get으로 id주면 가져올수있다.
+			
+			StringTokenizer st= new StringTokenizer(result,"|");
+			session.setAttribute("name",st.nextToken());
+			session.setAttribute("sex",st.nextToken());
+			
 			session.setAttribute("name", result);
 			// 쿠기는 문자열만 저장가능 매개변수 String!
 			//session오브젝트 형이라 어레이리스트 전체 저장 가능

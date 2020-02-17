@@ -1,3 +1,4 @@
+
 package com.sist.servlet;
 
 import java.io.*;
@@ -29,7 +30,8 @@ public class MusicList extends HttpServlet {
 			strPage="1";
 		int curpage = Integer.parseInt(strPage); // 페이지가 없으니까 1페이지를 부여함!!
 		/*
-		 * 1. http://localhost/MusicProject2/MusicList ==> null값이다. => 따라서 처리를 따로 해줘야함!
+		 * 1. http://localhos
+		 * t/MusicProject2/MusicList ==> null값이다. => 따라서 처리를 따로 해줘야함!
 		 * if(strPage==null)  // 없다면 => 1 맨첫페이지는 NULL! 처리를 해줘야한다! 
 			strPage="1";
 		 * 
