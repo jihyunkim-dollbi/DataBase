@@ -64,7 +64,7 @@ public class MusicDetail extends HttpServlet {
 		out.println("<link rel=stylesheet href=\"css/bootstrap.min.css\">");
 		out.println("<style type=text/css>");
 		out.println(".col-md-9{"); // 화면분할 9대3으로
-		out.println("margin: 0px auto;");
+		out.println("margin: 100px 50px 100px 230px;");
 		out.println("width: 900px;");  //9의 크기를 800으로 하겠다!!
 		out.println("}");
 		out.println("h1{");
@@ -121,7 +121,9 @@ public class MusicDetail extends HttpServlet {
 		
 		
 		out.println("</head>");
+		
 		out.println("<body>");
+		out.println("<center>");
 	//	out.println("<h1>"+session.getAttribute("name")+"님 환영합니다</h1>"); // 키를 넣어줌!
 		out.println("<div class=container-fluid>"); //여백주기!
 		
@@ -335,7 +337,9 @@ public class MusicDetail extends HttpServlet {
 		//5개 인기순 출력하기 - 디테일 오른쪽에!!
 		out.println("<div class=col-md-3>");
 		out.println("<table class=\"table table-striped\">");
+		
 		out.println("<caption>인기순위 Top 5</caption>"); // 테이블제목
+		
 		for(MusicVO tvo:topList)
 		{
 			
@@ -356,6 +360,7 @@ public class MusicDetail extends HttpServlet {
 		
 		out.println("</div>");
 		out.println("</div>");
+		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
 		
