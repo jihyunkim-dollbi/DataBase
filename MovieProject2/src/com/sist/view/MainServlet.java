@@ -2,6 +2,7 @@ package com.sist.view;
 
 import java.io.*;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,11 +67,9 @@ public class MainServlet extends HttpServlet {
 		case 1:
 			sname="ReleasedServlet";
 			break;
-
 		case 2:
 			sname="ScheduleServlet";
 			break;
-
 		case 3:
 			sname="NewsServlet";
 			break;
@@ -83,8 +82,9 @@ public class MainServlet extends HttpServlet {
 		case 6:
 			sname="YearlyServlet";
 			break;	
-	
-			
+		case 7:
+			sname="MovieDetailServlet";
+			break;
 		}
 		
 		
@@ -94,7 +94,7 @@ public class MainServlet extends HttpServlet {
 		out.println("<head>");
 		out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"); // \해주기!
 		out.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>");
-		out.println(" <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js\"></script>");
+		out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js\"></script>");
 		out.println("</head>");
 		
 		//화면출력

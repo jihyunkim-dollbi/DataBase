@@ -90,7 +90,8 @@ public class ReleasedServlet extends HttpServlet {
 			
 			out.println("<div class=\"col-md-3\">");	
 			out.println("<div class=\"thumbnail\">");
-			out.println("<a href=\"#\">");
+			//디테일로 넘어감=>  메인에서는 mode7과 mno에서
+			out.println("<a href=\"MainServlet?mode=7&mno="+vo.getMno()+"\">");
 			out.println("<img src=\""+vo.getPoster()+"\" alt=\"Lights\" style=\"width:100%\">");
 			out.println("</a>"); //이미지에만 링크가 걸림!
 			out.println("<div class=\"caption\">");
