@@ -330,9 +330,11 @@ public class MusicDetail extends HttpServlet {
 		
 		}
 		
-		
-		
 		out.println("</div>");
+		
+		
+		
+		
 		
 		//5개 인기순 출력하기 - 디테일 오른쪽에!!
 		out.println("<div class=col-md-3>");
@@ -359,6 +361,10 @@ public class MusicDetail extends HttpServlet {
 		out.println("</table>");
 		
 		out.println("</div>");
+		
+		
+		
+		
 		out.println("</div>");
 		out.println("</center>");
 		out.println("</body>");
