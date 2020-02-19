@@ -139,8 +139,8 @@ public class EmpDAO {
 	}
 	
 	
-	//기능수행 1
-	// 값 받을때 값이 리스트면 리스트 한개면 한개
+	// 기능수행 1
+	// 값 받을때 값이 리스트면 리스트,  한개면 한개
 	// SELECT => 전체데이터 읽기 ==> ARRAYLIST로 
 	
 	public ArrayList<EmpVO> empAllData()
@@ -153,7 +153,7 @@ public class EmpDAO {
 			// 연결
 			getConnection();
 			// sql 문장 제작
-			String sql="SELECT * " // 공백유위
+			String sql="SELECT * " // 공백유의
 					+"FROM emp "
 					+"ORDER BY empno"; // 정렬한 상태로 가져오기 // 매번 데이터 가져올때 order by 해서 가져오기.// order는 속도 느려져 ==> index로 바꿀 예정!
 			
@@ -164,6 +164,12 @@ public class EmpDAO {
 			// ps를 실행하여 resultset rs에 (next.() 커서를 옮기면서 값을 읽음-> 값이 없으면 false되고 빠져나감.)
 			// 맨위에서부터 읽으면 .next() - 
 			// 맨 아래부터 읽으면 .previous()로
+			//ps. ==> input 하고
+			//executeQuery(); ==> 오라클에 명령하여
+			//그 명령한 결과들을 resultset rs에 넣음!!!
+			
+			
+			
 			while(rs.next()) //횟수가 모르기때문에 while문 이용!
 			{
 				//한줄읽어서 저장 empVO // 8개를 읽
