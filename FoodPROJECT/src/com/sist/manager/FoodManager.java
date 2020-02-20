@@ -49,10 +49,6 @@ package com.sist.manager;
             </li>
  *
  */
-
-
-
-
 import java.util.*;
 
 import org.jsoup.Jsoup;
@@ -60,6 +56,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import com.sist.dao.*; 
 
+//arraylist로 크롤링!
 public class FoodManager {
 
 	public ArrayList<CategoryVO> categoryAllData(){

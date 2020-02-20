@@ -114,7 +114,7 @@ public class EmpDAO {
 			String sql="SELECT * FROM emp_dept";
 					
 					
-			ps=conn.prepareStatement(sql);
+ 
 			ResultSet rs=ps.executeQuery();
 			
 			
