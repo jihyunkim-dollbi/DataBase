@@ -36,6 +36,8 @@ import com.sist.vo.*;
  *   ** 유일하게 선언되지 않은 것은 내장객체가 아닌것은 쿠키이다.
  *   
  * 	 spring(공부전에 XML과 어노테이션 선행학습필요!)-> annotation기반!(클래스를 찾을 수 있도록 별칭을 부여하여..)으로 클래스 자동찾음!
+ * 		==> annotation -> 클래스를 찾을 수 있도록 인덱스를 줘서 자동으로 찾을수 있도록 만듬
+ * 		==> xml -> 만들어 놓은 클래스를 xml등록을 하여 사용?,,,,,
  * 		
  *   @WebServlet("/NewsServlet") =>	case 3:  sname="NewsServlet";
 
