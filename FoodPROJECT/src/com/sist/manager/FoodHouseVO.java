@@ -30,8 +30,7 @@ public class FoodHouseVO {
 	private String tel;
 	private String type;
 	private String price;
-	private String parking;
-	private String time;
+	
 	private String image;
 	private int good;
 	private int soso;
@@ -85,18 +84,7 @@ public class FoodHouseVO {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public String getParking() {
-		return parking;
-	}
-	public void setParking(String parking) {
-		this.parking = parking;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
+
 	public String getImage() {
 		return image;
 	}

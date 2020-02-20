@@ -5,6 +5,7 @@ package com.sist.manager;
 
 
 
+
 // jsoup 를 web-inf- lib에 넣어놓음
 //jdk에 놓지 않고 여기에 넣은 이유는?
 /*
@@ -49,12 +50,19 @@ package com.sist.manager;
             </li>
  *
  */
-import java.util.*;
+import java.util.*
+;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.sist.dao.*; 
+import com.sist.dao.*;
+
+
 
 //arraylist로 크롤링!
 public class FoodManager {
@@ -102,15 +110,175 @@ public class FoodManager {
 			
 		}
 		return list;
-		
-		
+	
 	}
 	
+	public ArrayList<FoodHouseVO> foodAllData(){
+		
+		ArrayList<FoodHouseVO> fList=new ArrayList<FoodHouseVO>();
+		
+		try
+		{
+			ArrayList<CategoryVO> cList=categoryAllData();
+			
+			int k=1;
+			for(CategoryVO cvo:cList)
+			{
+				Document doc=Jsoup.connect(cvo.getLink()).get();
+				//12바퀴 돌기
+				Elements link=doc.select("div.info span.title a");
+				
+				//cateno확인위해!
+				System.out.println(cvo.getTitle());
+				for(int j=0;j<link.size();j++)
+				{
+					
+					
+					try{//에러를 건너띄고 
+						
+					
+					String url="https://www.mangoplate.com"+link.get(j).attr("href");
+					
+					//상세보기 링크 - 10개 읽음!!
+					Document doc2=Jsoup.connect(url).get();
+					
+					Elements poster=doc2.select("figure.list-photo img.center-croping");
+						
+					
+					//poster가져오기!!
+					String img="";					
+					for(int a=0; a<poster.size(); a++)
+					{
+						System.out.println(poster.get(a).attr("src"));
+						img+=poster.get(a).attr("src")+"^";  //^붙임!
+						
+						
+					}
+					
+					img=img.substring(0, img.lastIndexOf("^")); //^ 마다 자를 예정!
+					
+					System.out.println("************************************");
+					
+					
+					Element title=doc2.selectFirst("span.title h1.restaurant_name");
+					Element score=doc2.selectFirst("span.title strong.rate-point span"); //
+					Element address=doc2.select("table.info tr td").get(0); //td가 여러가지라서 순서대로여러개를 동시에 가져올때
+					Element tel=doc2.select("table.info tr td").get(1);
+					Element type=doc2.select("table.info tr td").get(2);
+					Element price=doc2.select("table.info tr td").get(3);
+					Element temp=doc2.selectFirst("script#reviewCountInfo");
+					
+					System.out.println("k=" + k);
+					System.out.println(title.text());
+					System.out.println(score.text());
+					System.out.println(address.text());
+					System.out.println(tel.text());
+					System.out.println(type.text());
+					System.out.println(price.text());
+					System.out.println(temp.data());
+					System.out.println("================================================");
+					
+					
+					FoodHouseVO vo=new FoodHouseVO();
+					vo.setCno(cvo.getCateno());
+					vo.setTitle(title.text());
+					vo.setScore(Double.parseDouble(score.text()));
+					vo.setAddress(address.text());
+					vo.setTel(tel.text());
+					vo.setType(type.text());
+					vo.setPrice(price.text());
+					vo.setImage(img);
+					
+					// [{"action_value":1,"count":6},{"action_value":2,"count":20},{"action_value":3,"count":100}] => 배열이므로  어레이로 받아야함@!
+					// count 값이 필요하다 good, soso, bad  ==>    6, 20 , 100 을 가져올 예정!!
+					
+					JSONParser parser=new JSONParser();
+					JSONArray arr=(JSONArray)parser.parse(temp.data());
+					System.out.println("JSON=> "+arr.toJSONString());
+					/*
+					 * JSON PARSER!
+					 * {} => OBJECT
+					 * [{},{},{},{}...] => ARRAY
+					 */
+					
+					
+					
+					// bad, soso, good 3가지!!
+					long[] data=new long[3];					
+					for(int  b=0; b<arr.size();b++)
+					{
+						JSONObject obj=(JSONObject)arr.get(b); // 3바퀴돌림 => 3개!
+						System.out.println("Object=> "+obj.toJSONString());
+						/*
+						 * object! {}
+						 * Object=> {"count":9,"action_value":1}
+						 * 
+						 * array! [{},{},{},{}...] 
+						 * JSON=> [{"count":9,"action_value":1},{"count":31,"action_value":2},{"count":94,"action_value":3}]   
+						 */
+						
+						long count=(Long)obj.get("count"); // long!!!!! => Long!!!!
+						//첫번째 COUNT에서 GET()=>키와 값 중에 값을 가져옴!
+						
+						data[b]=count;
+						
+						
+						System.out.println("count="+count);	
+						
+					}
+					
+					vo.setBad((int)data[0]);
+					vo.setSoso((int)data[1]);
+					vo.setGood((int)data[2]);
+					fList.add(vo);
+					
+					
+					k++;
+					
+				}catch(Exception ex) {ex.printStackTrace();}
+				
+			 }
+				
+			}
+			
+			
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			System.out.println("에러");
+		}
+		
+		
+		return fList;
+		
+	}
 	
 	public static void main(String[] args) {
 		
 		FoodManager fm = new FoodManager();
-		ArrayList<CategoryVO>list = fm.categoryAllData();
+		ArrayList<FoodHouseVO> list=fm.foodAllData();
+		FoodDAO dao=FoodDAO.newInstance();
+		
+		int k=1;
+		for(FoodHouseVO vo:list)
+		{
+			dao.foodHouseInsert(vo);
+			
+			System.out.println("k="+k);
+			
+			
+			try
+			{
+				Thread.sleep(100);
+				
+			}catch(Exception ex){}
+			
+			k++;
+		}
+		
+		System.out.println("save end.........");
+	/*	ArrayList<CategoryVO>list = fm.categoryAllData();
 		//메인이 들어가는 것은 웹이 아니다.=> 웹은 서블릿,jsp을 구동해야하는 것 => 톰캣이 필요! 따라서 메일메소드에서 작동은 톰캣의 작동이 상관없다!
 		//메인은 일반 자바 애플릿케이션!
 		
@@ -127,7 +295,7 @@ public class FoodManager {
 		}
 				
 		System.out.println("save end ...");
-		
+*/		
 		
 		
 /*

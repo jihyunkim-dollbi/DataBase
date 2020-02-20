@@ -12,7 +12,7 @@ public class FoodDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	private static FoodDAO dao; //싱클톤으로 만들기!
-	// private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
+	//private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
 	
 	
 	
@@ -20,8 +20,8 @@ public class FoodDAO {
 	//모든 설정파일이 XML이 될 예정!
 	
 	
-	
-	/* pool사용하기 위해 ! 필요없어짐! 
+	/*
+	// pool사용하기 위해 ! 필요없어짐! 
 	public FoodDAO(){
 		
 		try
@@ -171,8 +171,9 @@ public class FoodDAO {
 			getConnection();
 			//LINK는 다른 맛집을긁기 위해1!
 			//cateno는 목록중 한개를 클릭하면 포함된 리스트를 출력하기 위해!!
-			String sql="SELECT cateno, title, subject, poster"
-					+ "FROM category";
+			String sql="SELECT cateno, title, subject, poster "
+					+ "FROM category "
+					+ "ORDER BY cateno ASC";
 			
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -205,6 +206,54 @@ public class FoodDAO {
 		
 		
 	}
+	
+	
+	
+	public void foodHouseInsert(FoodHouseVO vo)
+	{
+		//열고닫는 속도와 가져오는 속도가 잘 안맞기 때문에=>DBCP가 좋음 =>빠뜨리지 않고 가져옴
+		//MYBATIS  GOOD!
+		
+		
+		try
+		{
+			getConnection();
+			
+			String sql="INSERT INTO foodhouse VALUES("
+					+ "foodhouse_no_seq.nextval,?,?,?,?,"
+					+ "?,?,?,?,?,?,?,'none')";  // tag는 나중에 채울예정!!
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, vo.getCno());
+			ps.setString(2, vo.getTitle());
+			ps.setDouble(3, vo.getScore());
+			ps.setString(4, vo.getAddress());
+			ps.setString(5, vo.getTel());
+			ps.setString(6, vo.getType());
+			ps.setString(7, vo.getPrice());
+			ps.setString(8, vo.getImage());
+			
+			ps.setInt(9, vo.getGood());
+			ps.setInt(10, vo.getSoso());
+			ps.setInt(11, vo.getBad());
+		
+			
+			ps.executeUpdate();
+					
+			
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			
+		}finally
+		{
+			disConnection();
+			
+		}
+	
+	}
+	
 	
 	
 	
