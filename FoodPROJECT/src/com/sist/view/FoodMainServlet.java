@@ -1,6 +1,6 @@
 package com.sist.view;
 
-import java.io.*;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.dao.*;
 import com.sist.manager.CategoryVO;
 
-import java.util.*;
+import java.io.*; // has printwriter
+import java.util.*; // has arraylist
 
 
 @WebServlet("/FoodMainServlet")
