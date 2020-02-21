@@ -98,16 +98,11 @@ public class FoodManager {
 				// &를 하게되면  &amp라고 나오기 때문에 '변수를 입력하라는 뜻이다' => 따라서 이미지에서 &빼고 가져옴!
 				
 				list.add(vo);
-			
 			}
-			
-			
-			
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
-			
 		}
 		return list;
 	
@@ -278,7 +273,9 @@ public class FoodManager {
 		}
 		
 		System.out.println("save end.........");
-	/*	ArrayList<CategoryVO>list = fm.categoryAllData();
+
+		/*
+		 ArrayList<CategoryVO>list = fm.categoryAllData();
 		//메인이 들어가는 것은 웹이 아니다.=> 웹은 서블릿,jsp을 구동해야하는 것 => 톰캣이 필요! 따라서 메일메소드에서 작동은 톰캣의 작동이 상관없다!
 		//메인은 일반 자바 애플릿케이션!
 		
@@ -291,7 +288,6 @@ public class FoodManager {
 			dao.categoryInsert(vo);
 			System.out.println("k="+k);
 			k++;
-			
 		}
 				
 		System.out.println("save end ...");

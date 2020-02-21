@@ -1,12 +1,15 @@
 package com.sist.dao;
 
 import java.util.*;
+
 import java.util.Locale.Category;
 import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 import com.sist.manager.*;
+
 // connection pool
+
 public class FoodDAO {
 
 	private Connection conn;
@@ -21,7 +24,8 @@ public class FoodDAO {
 	
 	
 	/*
-	// pool사용하기 위해 ! 필요없어짐! 
+	
+	pool사용하기 위해 ! 필요없어짐! 
 	public FoodDAO(){
 		
 		try
@@ -36,8 +40,8 @@ public class FoodDAO {
 			
 		}
 		
-		
 	}
+	
 	*/
 	
 	
@@ -53,7 +57,7 @@ public class FoodDAO {
 		try
 		{
 			//실행을 하자마자 
-			// conn=DriverManager.getConnection(URL, "hr", "happy");
+			//conn=DriverManager.getConnection(URL, "hr", "happy");
 			
 			//POOL사용하기!
 			//이미 만들어져있는 커넥션 객체만 가져오면 됨!!
@@ -131,7 +135,6 @@ public class FoodDAO {
 		//열고닫는 속도와 가져오는 속도가 잘 안맞기 때문에=>DBCP가 좋음 =>빠뜨리지 않고 가져옴
 		//MYBATIS  GOOD!
 		
-		
 		try
 		{
 			getConnection();
@@ -145,17 +148,15 @@ public class FoodDAO {
 			ps.setString(4, vo.getPoster());
 			ps.setString(5, vo.getLink());
 			ps.executeUpdate();
-					
 			
-			
-		}catch(Exception ex)
+		}
+		catch(Exception ex)
 		{
-			ex.printStackTrace();
-			
-		}finally
+			ex.printStackTrace();	
+		}
+		finally
 		{
 			disConnection();
-			
 		}
 	
 	}
@@ -185,8 +186,7 @@ public class FoodDAO {
 				vo.setTitle(rs.getString(2));
 				vo.setSubject(rs.getString(3));
 				vo.setPoster(rs.getString(4));
-				list.add(vo);				
-				
+				list.add(vo);					
 			}
 			rs.close();
 			
@@ -200,8 +200,6 @@ public class FoodDAO {
 			
 		}
 		
-		
-		
 		return list;
 		
 		
@@ -214,14 +212,13 @@ public class FoodDAO {
 		//열고닫는 속도와 가져오는 속도가 잘 안맞기 때문에=>DBCP가 좋음 =>빠뜨리지 않고 가져옴
 		//MYBATIS  GOOD!
 		
-		
 		try
 		{
 			getConnection();
 			
 			String sql="INSERT INTO foodhouse VALUES("
 					+ "foodhouse_no_seq.nextval,?,?,?,?,"
-					+ "?,?,?,?,?,?,?,'none')";  // tag는 나중에 채울예정!!
+					+ "?,?,?,?,?,?,?,'none')";  //'none' => tag는 나중에 채울예정!!
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, vo.getCno());
@@ -256,5 +253,194 @@ public class FoodDAO {
 	
 	
 	
+	
+	public ArrayList<FoodHouseVO> foodHouseListData(int cno)
+	{
+		ArrayList<FoodHouseVO> list=new ArrayList<FoodHouseVO>();
+		
+		try
+		{
+			getConnection();
+			
+			String sql="SELECT image, title, score,address, no "
+					+ "FROM foodhouse "
+					+ "WHERE cno=?";
+			
+			ps=conn.prepareStatement(sql);
+			
+			ps.setInt(1, cno);
+			ResultSet rs=ps.executeQuery();
+			
+			
+			while(rs.next())
+			{
+				FoodHouseVO vo=new FoodHouseVO();
+				String img=rs.getString(1);
+				//한개만 출력하려함!!
+				vo.setImage(img.substring(0,img.indexOf("^")));
+				vo.setTitle(rs.getString(2));
+				vo.setScore(rs.getDouble(3));
+				vo.setAddress(rs.getString(4));
+				vo.setNo(rs.getInt(5));
+				
+				list.add(vo);
+			}
+			rs.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return list;
+	}
+	
+	
+	//arraylist로 가져오지 않은 이유는?
+	//catono말고 cno를 넣은 이유는?
+
+	public CategoryVO categoryInfoData(int cno)
+	{
+		CategoryVO vo =new CategoryVO();
+		
+		try
+		{
+			getConnection();
+			String sql="SELECT title, subject FROM category "
+					 + "WHERE cateno=?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, cno);
+			
+			//결과값 받기!
+			ResultSet rs=ps.executeQuery();
+			
+			rs.next(); //한줄이니까 한번만 움직이면 될것 같아?
+			vo.setTitle(rs.getString(1));
+			vo.setSubject(rs.getString(2));
+			rs.close();
+			
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			
+		}
+		finally
+		{
+			disConnection();
+			
+		}
+		return vo;
+		
+	}
+
+
+	
+	//상세보기
+	public FoodHouseVO foodDetailData(int no)
+	{
+		
+		FoodHouseVO vo=new FoodHouseVO();
+		
+		try
+		{
+			getConnection();
+			String sql="SELECT image, title, score, address, tel, type, price, good, soso, bad "
+					+ "FROM foodhouse "
+					+ "WHERE no=?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			
+			ResultSet rs=ps.executeQuery();
+			
+			
+			rs.next();
+			
+			vo.setImage(rs.getString(1));
+			vo.setTitle(rs.getString(2));
+			vo.setScore(rs.getDouble(3));
+			vo.setAddress(rs.getString(4));
+			vo.setTel(rs.getString(5));
+			vo.setType(rs.getString(6));
+			vo.setPrice(rs.getString(7));
+			vo.setGood(rs.getInt(8));
+			vo.setSoso(rs.getInt(9));
+			vo.setBad(rs.getInt(10));
+			
+			rs.close();
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			
+		}
+		finally
+		{
+			disConnection();
+		}
+		return vo;
+	}
+	
+	
+	
+	//지도출력!!!!!
+	public ArrayList<FoodHouseVO> foodLocationData(String loc)
+	{
+		ArrayList<FoodHouseVO> list=new ArrayList<FoodHouseVO>();
+		
+		try
+		{
+			getConnection();
+			
+			//인라인뷰 사용하기!
+			//신사동 모두 출력 => sort by score => sort by rownum 
+			String sql="SELECT image, title, score, address, tel, type, price,rownum "
+					+ "FROM (SELECT image, title, score, address, tel, type,price "
+					+ "FROM foodhouse "
+					+ "WHERE address LIKE '%'||?||'%' "
+					+ "ORDER BY score DESC) "
+					+ "WHERE rownum<=5";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, loc); //동을 주고 동을 찾아와서 출력할 예정!!
+			
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next())
+			{
+				
+			FoodHouseVO vo= new FoodHouseVO();
+			vo.setImage(rs.getString(1));
+			vo.setTitle(rs.getString(2));
+			vo.setScore(rs.getDouble(3));
+			vo.setAddress(rs.getString(4));
+			vo.setTel(rs.getString(5));
+			vo.setType(rs.getString(6));
+			vo.setPrice(rs.getString(7));
+			
+			list.add(vo);
+			}
+			
+			rs.close();
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return list;
+		
+	}
 	
 }

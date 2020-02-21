@@ -19,13 +19,8 @@ public class MainClass {
 			/*
 			 * 에러 ! 톰캣이 작동 x
 			 * java.lang.NullPointerException
-				at com.sist.dao.EmpDAO.empAllData(EmpDAO.java:117)
-				at com.sist.dao.MainClass.main(MainClass.java:12)
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
+			   at com.sist.dao.EmpDAO.empAllData(EmpDAO.java:117)
+			   at com.sist.dao.MainClass.main(MainClass.java:12)
 			 */
 	}
 

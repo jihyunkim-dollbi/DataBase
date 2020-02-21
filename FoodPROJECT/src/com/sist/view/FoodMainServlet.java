@@ -1,7 +1,5 @@
 package com.sist.view;
 
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +10,7 @@ import com.sist.manager.CategoryVO;
 
 import java.io.*; // has printwriter
 import java.util.*; // has arraylist
+
 
 
 @WebServlet("/FoodMainServlet")
@@ -67,7 +66,7 @@ public class FoodMainServlet extends HttpServlet {
 			out.println("<div class=\""+color+"\">");
 			out.println("<div class=\"panel-heading\">"+vo.getTitle()+"<br>"+vo.getSubject()+"</br></div>");
 			out.println("<div class=\"panel-body\">");
-			out.println("<a href=\"FoodCateListServlet?cno="+vo.getCateno()+"\">"); 
+			out.println("<a href=\"FoodListServlet?cno="+vo.getCateno()+"\">"); 
 			out.println("<img src=\""+vo.getPoster()+"\" width=100% class=img-rounded>");
 			out.println("</a>");	
 			

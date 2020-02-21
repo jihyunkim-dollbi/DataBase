@@ -36,6 +36,8 @@ public class FoodHouseVO {
 	private int soso;
 	private int bad;
 	private String tag;
+	
+	
 	public int getNo() {
 		return no;
 	}

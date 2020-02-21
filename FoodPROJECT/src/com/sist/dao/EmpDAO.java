@@ -10,6 +10,7 @@ package com.sist.dao;
  * 
  */
 import java.util.*;
+
 import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
@@ -130,24 +131,19 @@ public class EmpDAO {
 				vo.getDvo().setLoc(rs.getString(7));
 				
 				list.add(vo);
-				
-				
 			}
 			rs.close();
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
-			
 		}
 		finally
 		{
 			//반환
 			disConnection();
-			
 		}
 		return list;
-		
 	}
 	
 	
