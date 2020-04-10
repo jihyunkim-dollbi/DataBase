@@ -16,7 +16,7 @@ public class StudentDelete extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hakbun=request.getParameter("hakbun");
 		
-				//여기서 hakbun이 out.println("<td><a href=delete.do?hakbun="+vo.getHakbun()+">삭제</a></td>"); 의 hakbun과 동일해야한다
+				//여기서 hakbun이  out.println("<td><a href=delete.do?hakbun="+vo.getHakbun()+">삭제</a></td>"); 의 hakbun과 동일해야한다
 		//				=====									  ======						
 		
 		
