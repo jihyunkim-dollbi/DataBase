@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="com.sist.dao.*, java.util.*"%>
 <!-- 
 
-		system을 추가하면 도수창에 출력되고
+		system을 추가하면 도수창에  출력되고
 		system을 삭체하면 윈도 화면에 출력된다.
 		
 		out.println("<li>"+vo.getEmpno()+" "
