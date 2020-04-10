@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.dao.*;
 
 
-// 상세페이지 만들기!! 
+// 상세페이지 만들 기!! 
 // 보던 상세페이지를 확인한 후 해당 목록 페이지를 그대로 보여줘야함! 삭제, 목록보기,답변 등등!!  ==> hidden을 사용하여!! 있던 목록페이지로 다시 돌아가야함!!
 
 
