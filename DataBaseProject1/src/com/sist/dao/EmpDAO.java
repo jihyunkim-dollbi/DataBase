@@ -172,7 +172,7 @@ public class EmpDAO {
 			
 			while(rs.next()) //횟수가 모르기때문에 while문 이용!
 			{
-				//한줄읽어서 저장 empVO // 8개를 읽
+				//한줄읽어서 저장 empVO // 8개를  읽 
 				EmpVO vo = new EmpVO();
 				vo.setEmpno(rs.getInt(1));
 				vo.setEname(rs.getString(2));
