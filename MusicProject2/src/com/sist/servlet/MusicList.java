@@ -26,7 +26,7 @@ public class MusicList extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		String strPage = request.getParameter("page"); // 페이지 받기!! => 페이지에 변수가 1이 안 붙는다!!!
-		if(strPage==null)  // 없다면 => 1 맨첫페이지는 NULL! 처리를 해줘야한다! 1번만 해주면 끝!!
+		if(strPage==null)  // 없다면 => 1 맨첫페이지는 NULL! 처리를  해줘야한다! 1번만 해주면 끝!!
 			strPage="1";
 		int curpage = Integer.parseInt(strPage); // 페이지가 없으니까 1페이지를 부여함!!
 		/*
