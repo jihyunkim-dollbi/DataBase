@@ -2,7 +2,6 @@ package com.sist.dao;
 
 import java.util.*;
 
-import java.util.Locale.Category;
 import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
@@ -15,7 +14,7 @@ public class FoodDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	private static FoodDAO dao; //싱클톤으로 만들기!
-	//private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
+	private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
 	
 	
 	
@@ -105,7 +104,6 @@ public class FoodDAO {
 		
 		try
 		{
-		
 			//닫기 ps, conn
 			if(ps!=null) ps.close(); // close는 컴파일 익셉션을 가지고 있기때문에 예외처리를 해줘야한다!!
 			if(conn!=null) conn.close();
@@ -121,7 +119,6 @@ public class FoodDAO {
 	//시작하자마자 map에 저장하면 ..? 
 	//여러개 만들고 싶으면 clone=> 프로토타입!
 	public static FoodDAO newInstance(){
-		
 		
 		if(dao==null)
 			dao=new FoodDAO();
@@ -147,6 +144,7 @@ public class FoodDAO {
 			ps.setString(3, vo.getSubject());
 			ps.setString(4, vo.getPoster());
 			ps.setString(5, vo.getLink());
+			
 			ps.executeUpdate();
 			
 		}
@@ -229,7 +227,6 @@ public class FoodDAO {
 			ps.setString(6, vo.getType());
 			ps.setString(7, vo.getPrice());
 			ps.setString(8, vo.getImage());
-			
 			ps.setInt(9, vo.getGood());
 			ps.setInt(10, vo.getSoso());
 			ps.setInt(11, vo.getBad());
@@ -301,10 +298,9 @@ public class FoodDAO {
 	
 	//arraylist로 가져오지 않은 이유는?
 	//catono말고 cno를 넣은 이유는?
-
 	public CategoryVO categoryInfoData(int cno)
 	{
-		CategoryVO vo =new CategoryVO();
+		CategoryVO vo=new CategoryVO();
 		
 		try
 		{
@@ -398,7 +394,6 @@ public class FoodDAO {
 		try
 		{
 			getConnection();
-			
 			//인라인뷰 사용하기!
 			//신사동 모두 출력 => sort by score => sort by rownum 
 			String sql="SELECT image, title, score, address, tel, type, price,rownum "

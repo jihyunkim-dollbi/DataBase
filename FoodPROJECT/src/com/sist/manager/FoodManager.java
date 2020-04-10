@@ -2,12 +2,9 @@ package com.sist.manager;
 
 //1000개 이하는 arraylist로 가져오는 것이 good!!! 
 
-
-
-
-
-// jsoup 를 web-inf- lib에 넣어놓음
+//jsoup를 web-inf- lib에 넣어놓음
 //jdk에 놓지 않고 여기에 넣은 이유는?
+
 /*
  *<div class="module_title_wrap">
     <h2 class="title">믿고 보는 맛집 리스트</h2>
@@ -50,8 +47,8 @@ package com.sist.manager;
             </li>
  *
  */
-import java.util.*
-;
+import java.util.*;
+
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -60,6 +57,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import com.sist.dao.*;
 
 
@@ -67,12 +65,20 @@ import com.sist.dao.*;
 //arraylist로 크롤링!
 public class FoodManager {
 
+	
+	// category데이터 크롤링!
 	public ArrayList<CategoryVO> categoryAllData(){
 		
+		//카테고리 리스트를 arraylist로 받기 위해 객체 생성!!
 		ArrayList<CategoryVO> list=new ArrayList<CategoryVO>();
 		
 		try
 		{
+			
+			
+			
+			
+			
 			Document doc=Jsoup.connect("http://www.mangoplate.com/").get();
 			
 			Elements title=doc.select("div.info_inner_wrap span.title");
@@ -107,6 +113,8 @@ public class FoodManager {
 		return list;
 	
 	}
+	
+	
 	
 	public ArrayList<FoodHouseVO> foodAllData(){
 		

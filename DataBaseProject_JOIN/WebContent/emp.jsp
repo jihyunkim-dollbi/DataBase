@@ -50,7 +50,6 @@ width: 950px;
 				+vo.getDvo().getDname()+" "
 				+vo.getDvo().getLoc()+" "
 				+vo.getSvo().getGrade()+"</li><br>");	
-	
 	}
 
 	%>

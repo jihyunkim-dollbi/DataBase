@@ -10,7 +10,7 @@
 }
 #table_content th,td{
 	margin: 0px; /*   td와 td사이 간격 0을 주어 붙여서 출력   */
-	padding: 8px;  /*  td안에 간격을 주어 한칸 띈 효과   */
+	padding: 8px;  /*  td안에 간격을  주어 한칸 띈 효과   */
 	font-size: 9pt;
 }
 #table_content th{

@@ -5,7 +5,6 @@ import java.sql.*;
 
 
 /*
-    
      private int mno;
      private String title;
      private double score;
@@ -29,7 +28,9 @@ public class MovieDAO {
      private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
      private static MovieDAO dao;
      
-     // ����̹� ��� => �ѹ��� ����  
+    
+     
+     
      public MovieDAO()
      {
     	 try
