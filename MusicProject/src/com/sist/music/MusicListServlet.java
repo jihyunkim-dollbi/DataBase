@@ -22,7 +22,7 @@ public class MusicListServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		//데이터읽기
-		//사용자 요청한 페이지 받기
+		//사용자 요청한  페이지 받기
 		//MusicListServlet?page=1
 		
 		

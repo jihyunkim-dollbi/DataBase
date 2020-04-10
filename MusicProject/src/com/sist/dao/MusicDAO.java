@@ -62,7 +62,7 @@ public class MusicDAO {
 		
 		
 		// 기능
-		// 목록 출력하기
+		// 목록  출력하기
 		// 순위,state,idCliment,poster, title,singer,album
 		public ArrayList<MusicVO> musicListData(int page)
 		{
